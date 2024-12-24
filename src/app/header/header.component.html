@@ -8,14 +8,31 @@
       </button>
       <!-- Logo -->
       <div class="logo-container me-3">
-        <img src="https://i.postimg.cc/Y9KLVq7F/logo-png.png" alt="Logo" class="logo">
+        <img src="..//assets/image/cecw.png" alt="Logo" class="logo">
       </div>
       <!-- Navbar links -->
       <nav class="d-none d-md-flex ms-4">
         <a routerLink="userhome" class="nav-link fw-bold"><i class="bi bi-house-door"></i> Home</a>
-        <a routerLink="suggestion" class="nav-link fw-bold"><i class="bi bi-lightbulb"></i> Suggestion Forum</a>
+
+        <!-- Dropdown for Suggestion -->
+        <div class="dropdown">
+          <a
+            class="nav-link dropdown-toggle fw-bold"
+            id="suggestionDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-lightbulb"></i> Suggestion
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="suggestionDropdown">
+            <li><a class="dropdown-item" routerLink="suggestion">Suggestion Forum</a></li>
+            <li><a class="dropdown-item" routerLink="viewsuggestion">View Suggestions</a></li>
+          </ul>
+        </div>
+
         <a routerLink="mytickets" class="nav-link fw-bold"><i class="bi bi-card-checklist"></i> My Tickets</a>
-        <a routerLink="myprofile" class="nav-link fw-bold"><i class="bi bi-card-checklist"></i>My Profile</a>
+        <a routerLink="myprofile" class="nav-link fw-bold"><i class="bi bi-person"></i> My Profile</a>
       </nav>
     </div>
 
@@ -35,6 +52,7 @@
     </nav>
   </aside>
 
+  <!-- Main Content -->
   <div class="content pt-5">
     <div class="container mt-5">
       <!-- Routed components will appear here -->

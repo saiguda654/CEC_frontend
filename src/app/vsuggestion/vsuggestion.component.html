@@ -1,0 +1,78 @@
+<div class="query-container">
+    <h5 class="text-center query-header">Suggestions</h5>
+  
+    <!-- Edit Form -->
+    <div *ngIf="isEditing" class="edit-form">
+      <h6>Edit Suggestion</h6>
+      <form (ngSubmit)="saveSuggestion()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            [(ngModel)]="currentSuggestion.title"
+            name="title"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            id="description"
+            class="form-control"
+            [(ngModel)]="currentSuggestion.description"
+            name="description"
+            rows="3"
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">Save</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+  
+    <!-- Suggestions List -->
+    <div *ngIf="!isEditing" class="table-responsive">
+      <table class="table table-hover align-middle">
+        <thead>
+          <tr>
+            <th><strong>Suggestion ID</strong></th>
+            <th><strong>Title</strong></th>
+            <th><strong>Description</strong></th>
+            <th><strong>Actions</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let suggestion of suggestions" class="query-row">
+            <td>{{ suggestion.suggestion_id }}</td>
+            <td>{{ suggestion.title }}</td>
+            <td>{{ suggestion.description }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm me-2" (click)="editSuggestion(suggestion)">Edit</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteSuggestion(suggestion.suggestion_id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- No Data Message -->
+    <div *ngIf="suggestions.length === 0" class="no-tickets-message">
+      <p>No tickets available</p>
+      <img src="../assets/image/nodata.svg" alt="No data available" class="nodataimg" />
+    </div>
+
+    <div *ngIf="showPopup" class="popup-container">
+        <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+          <span class="popup-icon">
+            <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+            <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+          </span>
+          <div class="popup-message">
+            <p>{{ popupMessage }}</p>
+          </div>
+        </div>
+      </div>
+  </div>
+  

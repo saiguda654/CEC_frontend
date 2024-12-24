@@ -201,3 +201,52 @@ label {
   color: #b48250;
 }
 
+
+/* Popup Container */
+.popup-container {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeInOut 3s ease-in-out; /* Controls entry and exit animation */
+}
+
+/* Popup Content */
+.popup-content {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 5px solid;
+  font-size: 1rem;
+  min-width: 300px;
+  gap: 12px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Success and Error Styles */
+.popup-content.success {
+  border-color: #28a745; /* Green border for success */
+  color: #28a745; /* Green text */
+}
+
+.popup-content.error {
+  border-color: #dc3545; /* Red border for error */
+  color: #dc3545; /* Red text */
+}
+
+/* Popup Icon */
+.popup-icon i {
+  font-size: 1.5rem;
+}
+
+/* Popup Message */
+.popup-message p {
+  margin: 0;
+  font-weight: 500;
+}

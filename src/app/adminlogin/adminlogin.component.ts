@@ -21,6 +21,7 @@ export class AdminloginComponent {
   adminService = inject(AdminService)
   http = inject(HttpClient)
   router = inject(Router);
+  showPassword: boolean = false;
     // Initialize the form group
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -28,6 +29,9 @@ export class AdminloginComponent {
     adminType: new FormControl('G', Validators.required) // Default to "General"
   });
 
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
 
   onSubmit(): void {
     if (this.loginForm.valid) {

@@ -35,7 +35,7 @@
         <div class="password-container">
           <input type="{{ showPassword ? 'text' : 'password' }}" id="password" formControlName="password" class="form-control" placeholder="Enter your password" required />
           <span (click)="togglePasswordVisibility()" class="password-toggle-icon">
-            <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
           </span>
         </div>
         <small class="error" *ngIf="registrationForm.get('password')?.touched && registrationForm.get('password')?.invalid">
@@ -49,7 +49,7 @@
         <div class="password-container">
           <input type="{{ showPassword ? 'text' : 'password' }}" id="confirmPassword" formControlName="confirmPassword" class="form-control" placeholder="Confirm your password" required />
           <span (click)="togglePasswordVisibility()" class="password-toggle-icon">
-            <i [ngClass]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
           </span>
         </div>
         <small class="error" *ngIf="registrationForm.errors?.['mismatch'] && registrationForm.get('confirmPassword')?.touched">
@@ -61,5 +61,16 @@
       <button type="submit" class="btn btn-primary btn-register" [disabled]="!registrationForm.valid">Register</button>
       <p>Already have an account? <button class="btn btn-link register" (click)="navigateToSignIn()">Sign in</button></p>
     </form>
+  </div>
+  <div *ngIf="showPopup" class="popup-container">
+    <div class="popup-content" [ngClass]="isSuccess ? 'success' : 'error'">
+      <span class="popup-icon">
+        <i *ngIf="isSuccess" class="fas fa-check-circle"></i>
+        <i *ngIf="!isSuccess" class="fas fa-exclamation-circle"></i>
+      </span>
+      <div class="popup-message">
+        <p>{{ popupMessage }}</p>
+      </div>
+    </div>
   </div>
 </div>

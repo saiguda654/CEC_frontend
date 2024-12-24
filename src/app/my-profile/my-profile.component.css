@@ -1,66 +1,138 @@
-
-
 .center-container {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; /* Ensures proper positioning of background and overlay */
+}
+
+/* Profile Card */
+.profile-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1; /* Ensures the profile card stays above the blur */
+}
+
+/* Gradient Header */
+.bg-gradient {
+  padding: 20px;
+  border-radius: 15px 15px 0 0;
+}
+
+/* Card Body */
+.card-body {
+  padding: 20px;
+}
+
+/* Blur effect on the background */
+.card-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+  backdrop-filter: blur(5px); /* Apply blur to the background */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  background-color: #f5f5f5; /* Optional background color */
 }
 
+/* Modal Card Styling */
 .card {
-  border-radius: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: auto;
-}
-
-.modal-content {
+  margin-top: 20px;
   border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
-.modal-header {
-  background-color: #351C15;
-  color: #ffc400;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+/* Card Headers */
+.card-header {
+  background-color: transparent;
 }
 
-ul li strong {
-  font-weight: 500;
-}
-.pop_card label {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-weight: 600;
-}
-.pop_card input {
-  border: 0px none;
-  border-bottom: 1px solid gray;
-  font-weight: 300;
-}
-.update_card {
-  width: 400px;
-  max-width: 600px;
-}
-.container {
-  width: 300px;
-  margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.card-body .form-control {
+  border-radius: 8px;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease;
 }
 
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 3px;
+.card-body .form-control:focus {
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
 }
 
-.error {
-  color: red;
-  margin-bottom: 10px;
+/* Form Styling */
+.form-label {
+  font-size: 1rem;
 }
+
+.buttton {
+  justify-self: center;
+  width: 60%;
+}
+.btn-outline-primary {
+
+  border-color: #007bff;
+  color: #007bff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+  border-radius: 8px;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+/* Overlay and Animations */
+.card-overlay .card {
+  width: 75%;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.d-grid {
+  display: grid;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
 
 .popup-container {
   position: fixed;
@@ -110,23 +182,3 @@ input[type="password"] {
   font-weight: 500;
 }
 
-/* Animations */
-@keyframes slideIn {
-  from {
-    transform: translateY(-20%);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes fadeInOut {
-  0%, 100% {
-    opacity: 0;
-  }
-  10%, 90% {
-    opacity: 1;
-  }
-}

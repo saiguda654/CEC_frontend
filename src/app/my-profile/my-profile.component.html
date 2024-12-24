@@ -1,7 +1,7 @@
 <div class="center-container">
-  <div class="card mx-auto shadow-lg" style="width: 27rem; border-radius: 15px; overflow: hidden;">
+  <div class="profile-card card shadow-lg position-relative">
     <!-- User Image -->
-    <div class="text-center bg-gradient" style="background: linear-gradient(135deg, #6a11cb, #2575fc); padding: 20px;">
+    <div class="card-header text-center bg-gradient">
       <img
         src="..//assets/image/userlogoprofile.svg"
         alt="User Image"
@@ -13,75 +13,53 @@
     <!-- User Details -->
     <div class="card-body">
       <h6 class="card-title text-secondary text-center mb-4">User Information</h6>
-      <ul class="list-group list-group-flush mb-3">
-        <li class="list-group-item">
+      <ul class="list-group list-group-flush mb-4">
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
           <strong class="text-dark">User Id:</strong> <span class="float-end text-muted">{{ user.user_id }}</span>
         </li>
-        <li class="list-group-item">
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
           <strong class="text-dark">Email:</strong> <span class="float-end text-muted">{{ user.email }}</span>
         </li>
-        <li class="list-group-item">
+        <li style="margin-left: -50px; font-weight: 400;" class="list-group-item">
           <strong class="text-dark">Mobile Number:</strong> <span class="float-end text-muted">{{ user.phone_number }}</span>
         </li>
       </ul>
       <div class="d-grid gap-2">
-        <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">Edit Profile</button>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editpasswordModal">
-          Update Password
-        </button>
+        <button class="btn btn-outline-primary buttton" (click)="editProfile = !editProfile">Edit Profile</button>
+        <button type="button" class="btn btn-success buttton" (click)="editPassword = !editPassword">Update Password</button>
       </div>
     </div>
-  </div>
-</div>
 
-
-<!-- Edit Profile Modal -->
-<div class="modal fade mt-5" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style=" background-color: white;"></button>
-      </div>
-      <div class="modal-body">
+    <!-- Edit Profile Card (Appears on top) -->
+    <div *ngIf="editProfile" class="card-overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4 w-75">
+        <h5 class="text-center text-secondary mb-4">Edit Profile</h5>
         <form (ngSubmit)="updateProfile(user.user_id)">
-          <div class="mb-3 pop_card">
+          <div class="mb-4">
             <label for="name" class="form-label">Name</label>
             <input type="text" id="name" [(ngModel)]="user.name" name="name" class="form-control" />
           </div>
-          <div class="mb-3 pop_card">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" [(ngModel)]="user.email" name="email" class="form-control" />
-          </div>
-          <div class="mb-3 pop_card">
+          <div class="mb-4">
             <label for="phone_number" class="form-label">Mobile Number</label>
             <input type="text" id="phone_number" [(ngModel)]="user.phone_number" name="phone_number" class="form-control" />
           </div>
-          <div class="text-center" style="margin-top: 30px; margin-bottom: 20px;">
-            <button type="submit" class="btn btn-outline-primary w-100">Save Changes</button>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-primary">Save Changes</button>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-secondary" (click)="editProfile = false">Cancel</button>
           </div>
         </form>
       </div>
     </div>
-  </div>
-</div>
 
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="editpasswordModal" tabindex="-1" aria-labelledby="editpasswordModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content update_card">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editpasswordModalLabel">Change Password</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style=" background-color: white;"></button>
-      </div>
-      <div class="modal-body" style="padding: 40px;">
-        <form id="passwordForm">
-          <div class="mb-3">
-            <label for="currentPassword">Your Password:</label>
+    <!-- Update Password Card (Appears on top) -->
+    <div *ngIf="editPassword" class="card-overlay position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
+      <div class="card shadow-lg p-4 w-75">
+        <h5 class="text-center text-secondary mb-4">Change Password</h5>
+        <form id="passwordForm" (ngSubmit)="changePassword(user.user_id)">
+          <div class="mb-4">
+            <label for="currentPassword" class="form-label">Your Current Password:</label>
             <input
               type="password"
               id="currentPassword"
@@ -90,8 +68,8 @@
               class="form-control"
             />
           </div>
-          <div class="mb-3">
-            <label for="newPassword">New Password:</label>
+          <div class="mb-4">
+            <label for="newPassword" class="form-label">New Password:</label>
             <input
               type="password"
               id="newPassword"
@@ -100,8 +78,8 @@
               class="form-control"
             />
           </div>
-          <div class="mb-3">
-            <label for="confirmPassword">Confirm New Password:</label>
+          <div class="mb-4">
+            <label for="confirmPassword" class="form-label">Confirm New Password:</label>
             <input
               type="password"
               id="confirmPassword"
@@ -111,11 +89,13 @@
             />
           </div>
           <div class="text-danger" id="errorMessage">{{ errorMessage }}</div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-primary">Submit</button>
+          </div>
+          <div class="d-grid gap-2 mt-2">
+            <button type="button" class="btn btn-secondary" (click)="editPassword = false">Cancel</button>
+          </div>
         </form>
-      </div>
-      <div class="modal-footer text-center">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="changePassword(user.user_id)">Submit</button>
       </div>
     </div>
   </div>

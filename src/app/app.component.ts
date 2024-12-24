@@ -10,7 +10,7 @@ import { MyProfileComponent } from "./my-profile/my-profile.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, HeaderComponent, AdminHeaderComponent, MyProfileComponent,],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, AdminHeaderComponent, MyProfileComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

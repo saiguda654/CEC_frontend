@@ -66,5 +66,10 @@
     </div>
   </div>
 </div>
+<div *ngIf="rtickets.length > ticketsPerPage" class="pagination">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="page-button prev-next">Previous</button>
+  <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-button prev-next">Next</button>
+</div>
 </div>
 

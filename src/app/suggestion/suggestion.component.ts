@@ -32,7 +32,7 @@ export class SuggestionComponent implements OnInit {
 
   submitSuggestion(): void {
     if (this.suggestionForm.invalid) {
-      alert('Please fill in all required fields.');
+      this.triggerPopup(false, 'Please fill in all required fields.');
       return;
     }
 
@@ -68,6 +68,6 @@ export class SuggestionComponent implements OnInit {
     setTimeout(() => {
       this.showPopup = false;
       
-    }, 1000);
+    }, 2000);
   }
 }

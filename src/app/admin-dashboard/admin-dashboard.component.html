@@ -1,20 +1,41 @@
-<div class="dashboard-container">
-    <div class="analytics-cards">
-      <div class="card ">
-        <h3>New Tickets</h3>
-        <p class="stat">{{tickets}}</p>
-        <p class="growth">Increased by 60%</p>
-      </div>
-      <div class="card ">
-        <h3>Tickets In Progress</h3>
-        <p class="stat">{{ptickets}}</p>
-        <p class="growth">Decreased by 10%</p>
-      </div>
-      <div class="card ">
-        <h3>Tickets Solved</h3>
-        <p class="stat">{{rtickets}}</p>
-        <p class="growth">Increased by 15%</p>
+<div class="dashboard-container" [class.shift-right]="isSidebarActive">
+  <!-- Analytics Cards Section -->
+  <div class="analytics-cards">
+    <div class="card" [routerLink]="'/newtickets'" style="cursor: pointer;">
+      <h3>New Tickets</h3>
+      <p class="stat">{{ tickets }}</p>
+    </div>
+    <div class="card" [routerLink]="'/inprogress'" style="cursor: pointer;">
+      <h3>In Progress</h3>
+      <p class="stat">{{ ptickets }}</p>
+    </div>
+    <div class="card" [routerLink]="'/resolvedtickets'" style="cursor: pointer;">
+      <h3>Resolved Tickets</h3>
+      <p class="stat">{{ rtickets }}</p>
+    </div>
+  </div>
+
+  <!-- Visualizations Section -->
+  <div class="visualizations">
+    <div class="chart-container">
+      <h3>Tickets Raised Per Day</h3>
+      <div class="chart" style="height: 200px;">
+        <canvas id="ticketsRaisedPerDayChart"></canvas>
       </div>
     </div>
-  
+
+    <div class="chart-container">
+      <h3>Tickets Priority</h3>
+      <div class="chart" style="height: 400px;">
+        <canvas id="newTicketsPriorityChart"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h3>Tickets Status</h3>
+      <div class="chart" style="height: 200px;">
+        <canvas id="resolvedTicketsStatusChart"></canvas>
+      </div>
+    </div>
+  </div>
 </div>

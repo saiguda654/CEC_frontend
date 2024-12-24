@@ -14,6 +14,7 @@ import { InProgressTicketsComponent } from './in-progress-tickets/in-progress-ti
 import { ResolvedTicketsComponent } from './resolved-tickets/resolved-tickets.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import { VsuggestionComponent } from './vsuggestion/vsuggestion.component';
 
 
 export const routes: Routes = [
@@ -33,5 +34,6 @@ export const routes: Routes = [
     {path:'resolvedtickets',component:ResolvedTicketsComponent,data: { navbarType: 'admin' }},
     {path:'adashboard',component:AdminDashboardComponent,data: { navbarType: 'admin' }},
     {path:'myprofile',component:MyProfileComponent,data: { navbarType: 'customer' }},
+    {path:'viewsuggestion',component:VsuggestionComponent,data: { navbarType: 'customer' }},
     { path: '', redirectTo: '/home', pathMatch: 'full' }  
 ];

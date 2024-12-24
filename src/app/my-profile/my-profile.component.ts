@@ -23,6 +23,8 @@ export class MyProfileComponent {
   showPopup: boolean = false;
   popupMessage: string = '';
   isSuccess: boolean = false;
+  editProfile: boolean = false;
+  editPassword: boolean = false;
 
   constructor(private http: HttpClient) {}
 
@@ -49,10 +51,6 @@ export class MyProfileComponent {
   }
 
   updateProfile(userId: number): void {
-    if (!this.validateEmail(this.user.email)) {
-      this.triggerPopup(false, 'Invalid email format.');
-      return;
-    }
 
     if (!this.validatePhoneNumber(this.user.phone_number)) {
       this.triggerPopup(false, 'Invalid phone number format.');
@@ -133,12 +131,7 @@ export class MyProfileComponent {
     // Auto-hide popup after 3 seconds
     setTimeout(() => {
       this.showPopup = false;
-    }, 1000);
-  }
-
-  validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
+    }, 2000);
   }
 
   validatePhoneNumber(phoneNumber: string): boolean {

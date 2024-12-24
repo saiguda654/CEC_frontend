@@ -1,10 +1,11 @@
-
 <div class="container">
   <h2>Resolved Tickets</h2>
+  
   <div *ngIf="rtickets.length === 0" class="no-tickets-message">
     <p>No tickets available</p>
     <img src="..//assets/image/nodata.svg" alt="" class="nodataimg">
   </div>
+
   <table class="ticket-table" *ngIf="rtickets.length > 0">
     <thead>
       <tr>
@@ -16,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let ticket of rtickets">
+      <tr *ngFor="let ticket of paginatedTickets">
         <td>{{ ticket.ticket_id }}</td>
         <td>{{ getUserNameById(ticket.customer_id) }}</td>
         <td>{{ ticket.updated_at | date: 'yyyy-MM-dd'}}</td>
@@ -25,4 +26,11 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Pagination Controls -->
+  <div *ngIf="rtickets.length > ticketsPerPage" class="pagination">
+    <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1" class="page-button prev-next">Previous</button>
+    <span class="current-page">{{ currentPage }} / {{ totalPages }}</span>
+    <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages" class="page-button prev-next">Next</button>
+  </div>
 </div>

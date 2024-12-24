@@ -1,4 +1,4 @@
-import { afterNextRender, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -13,6 +13,10 @@ import { Router } from '@angular/router';
   styleUrl: './new-tickets.component.css'
 })
 export class NewTicketsComponent {
+  rtickets: any[] = [];
+  paginatedTickets: any[] = [];
+  currentPage: number = 1;
+  ticketsPerPage: number = 8;
   tickets: any[] = []; // This will hold the new tickets fetched from API
   selectedTicket: any = null; // To store the selected ticket details
   adminResponse = ''; // Admin response field
@@ -30,10 +34,11 @@ export class NewTicketsComponent {
   router = inject(Router);
   adminService = inject(AdminService);
   http = inject(HttpClient);
-  emailcontent = {to:'sivavicky223@gmail.com',subject:'',body:''};
+  emailcontent = {to:'',subject:'Query Update Status',body:''};
   apiURL: string = "https://localhost:7297/api/Ticket/Login";
   apiUrlE: string  = "https://localhost:7297/api/Email/send";
   apiUrlU: string  = "https://localhost:7297/api/User";
+  logoUrl: string = "https://i.postimg.cc/Y9KLVq7F/logo-png.png"
   noTicketsMessage: string ='';
   ngOnInit(): void {
     this.admin_type = this.adminService.getAdminType();
@@ -109,8 +114,8 @@ export class NewTicketsComponent {
     
     // Create the update payload, only including non-null values
     const updateRequest: any = {};
-    if (status) { updateRequest.status = status; this.emailcontent.subject = status; }
-    if (message) { updateRequest.message = message; this.emailcontent.body = message; }
+    if (status) { updateRequest.status = status; }
+    if (message) { updateRequest.message = message; }
     if (this.adminService.getAdminId()) updateRequest.assigned_admin_id = this.adminService.getAdminId();
     // Find the user by user_id from the ticket and set the email content 'to' field
     const user = this.users.find(u => u.user_id === this.selectedTicket.customer_id);
@@ -120,6 +125,21 @@ export class NewTicketsComponent {
       console.error('User not found for the ticket.');
       this.emailcontent.to = 'sivavicky223@gmail.com'; // Default email if user not found
     }
+    // Email template content
+    this.emailcontent.body = `
+      Dear Customer,
+
+      Your query has been updated with the following 
+
+      Status: "${status}"
+      Message from Admin: ${message}
+
+      ---
+
+      For further assistance, contact us at 
+      CEC@Support.com or call +91 9234567890.
+      © 2024 CEC. All rights reserved.
+      `;
   
     // HTTP PUT request to update the ticket
     this.http.put(apiUrl, updateRequest, { responseType: 'text' }).subscribe(
@@ -229,6 +249,20 @@ export class NewTicketsComponent {
     } else {
       console.error('Invalid ticketId:', ticketId);
     }
+  }
+  updatePaginatedTickets(): void {
+    const startIndex = (this.currentPage - 1) * this.ticketsPerPage;
+    const endIndex = startIndex + this.ticketsPerPage;
+    this.paginatedTickets = this.rtickets.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.updatePaginatedTickets();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.rtickets.length / this.ticketsPerPage);
   }
 
 }

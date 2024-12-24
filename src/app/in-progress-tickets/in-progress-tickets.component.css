@@ -283,3 +283,53 @@ thead tr th {
       opacity: 1;
   }
 }
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.page-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  font-size: 14px;
+}
+
+.page-button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.page-button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+.current-page {
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.prev-next {
+  padding: 8px 20px;
+}
+
+.prev-next:disabled {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+}

@@ -3,15 +3,19 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators, ValidatorFn, AbstractControl, FormBuilder } from '@angular/forms';
 import { CommonModule } from '@angular/common'; 
 import { Router } from '@angular/router';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [HttpClientModule, FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [HttpClientModule, FormsModule, ReactiveFormsModule, CommonModule,FontAwesomeModule],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent {
+  showPopup: boolean = false;
+  popupMessage: string = '';
+  isSuccess: boolean = false;
   http = inject(HttpClient);
   router = inject(Router);
 
@@ -61,16 +65,16 @@ export class RegistrationComponent {
         .subscribe({
           next: (response) => {
             console.log('Registration successful:', response);
-            alert('You have been registered successfully!');
+             this.triggerPopup(true, 'You have been registered successfully!');
             this.router.navigate(['login']);
             this.registrationForm.reset(); // Reset the form after submission
           },
           error: (err) => {
-            alert(`Error during registration: ${err.error}`);
+            this.triggerPopup(false, `Error during registration: ${err.error}`);
           }
         });
     } else {
-      alert('Please fill all fields correctly.');
+       this.triggerPopup(false, 'Please fill all fields correctly.');
     }
   }
 
@@ -82,5 +86,16 @@ export class RegistrationComponent {
   // Navigate to the Sign-Up page
   navigateToSignIn() {
     this.router.navigate(['login']);
+  }
+  triggerPopup(isSuccess: boolean, message: string): void {
+    this.isSuccess = isSuccess;
+    this.popupMessage = message;
+    this.showPopup = true;
+  
+    // Auto-hide popup after 3 seconds
+    setTimeout(() => {
+      this.showPopup = false;
+      
+    }, 1000);
   }
 }

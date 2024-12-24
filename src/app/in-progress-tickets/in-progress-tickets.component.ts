@@ -12,12 +12,16 @@ import { AdminService } from '../admin.service';
   styleUrl: './in-progress-tickets.component.css'
 })
 export class InProgressTicketsComponent {
+  rtickets: any[] = [];
+  paginatedTickets: any[] = [];
+  currentPage: number = 1;
+  ticketsPerPage: number = 8;
   showPopup: boolean = false;
   popupMessage: string = '';
   isSuccess: boolean = false;
   ptickets: any[] =[];
   adminResponse = '';
-  emailcontent = {to:'sivavicky223@gmail.com',subject:'',body:''};
+  emailcontent = {to:'',subject:'Query Update Status',body:''};
   apiUrlE: string  = "https://localhost:7297/api/Email/send";
   apiUrlU: string  = "https://localhost:7297/api/User";
   // Selected ticket for editing
@@ -58,8 +62,8 @@ export class InProgressTicketsComponent {
   
     // Create the update payload, only including non-null values
     const updateRequest: any = {};
-    if (status) {updateRequest.status = status;this.emailcontent.subject=status};
-    if (message) {updateRequest.message = message;this.emailcontent.body=message};
+    if (status) { updateRequest.status = status; }
+    if (message) { updateRequest.message = message; }
     const user = this.users.find(u => u.user_id === this.selectedTicket.customer_id);
     console.log(user.email);
     if (user) {
@@ -68,6 +72,20 @@ export class InProgressTicketsComponent {
       console.error('User not found for the ticket.');
       this.emailcontent.to = 'sivavicky223@gmail.com'; // Default email if user not found
     }
+    this.emailcontent.body = `
+      Dear Customer,
+
+      Your query has been updated with the following
+
+      Status: "${status}"
+      Message from Admin: ${message}
+
+      ---
+
+      For further assistance, contact us at 
+      CEC@Support.com or call +91 9234567890.
+      © 2024 CEC. All rights reserved.
+      `;
   
     // HTTP PUT request to update the ticket
     this.http.put(apiUrl, updateRequest, { responseType: 'text' }).subscribe(
@@ -115,5 +133,20 @@ export class InProgressTicketsComponent {
         console.error('Error sending email:', error);
       }
     );
+  }
+
+  updatePaginatedTickets(): void {
+    const startIndex = (this.currentPage - 1) * this.ticketsPerPage;
+    const endIndex = startIndex + this.ticketsPerPage;
+    this.paginatedTickets = this.rtickets.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+    this.updatePaginatedTickets();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.rtickets.length / this.ticketsPerPage);
   }
 }

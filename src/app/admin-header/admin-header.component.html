@@ -1,19 +1,27 @@
 <div class="wrapper">
   <header class="main-header d-flex align-items-center justify-content-between px-4">
-    <button id="menu-btn" class="btn btn-outline-dark" (click)="toggleSidebar()">
-      <i class="bi bi-list"></i> <!-- Using Bootstrap icons -->
+    <button id="menu-btn" class="btn btn-dark" (click)="toggleSidebar() "title="Options">
+      <i class="bi bi-list"></i> 
     </button>
-    <img src="https://i.postimg.cc/Y9KLVq7F/logo-png.png" alt="Logo" >
+    <img [routerLink]="'/adashboard'" style="cursor: pointer;" src="..//assets/image/CEC_brown.png" alt="Logo" >
     <button class="btn btn-danger" (click)="logout()">Logout</button>
   </header>
       
       <!-- Sidebar -->
       <aside class="sidebar bg-light shadow" [class.active]="isSidebarActive" id="sidebar">
         <nav (click)="navclose()" class="nav flex-column mt-5 p-3">
-          <a routerLink="adashboard" class="nav-link text-dark fw-bold"><i class="bi bi-card-checklist"></i>Home</a>
-          <a routerLink="newtickets" class="nav-link text-dark fw-bold"><i class="bi bi-envelope-plus"></i>New Tickets</a>
-          <a routerLink="inprogress" class="nav-link text-dark fw-bold"><i class="bi bi-card-checklist"></i>Progress Tickets</a>
-          <a routerLink="resolvedtickets" class="nav-link text-dark fw-bold"><i class="bi bi-lightbulb"></i>Resolved Tickets</a>
+          <a routerLink="adashboard" class="nav-link text-dark fw-bold" title="View the Dashboard for Ticket Management">
+            <i class="bi bi-card-checklist" style="color: black"></i> Home
+          </a>
+          <a routerLink="newtickets" class="nav-link text-dark fw-bold" title="View all newly created tickets">
+            <i class="bi bi-envelope-plus" style="color: black;"></i> New Tickets
+          </a>
+          <a routerLink="inprogress" class="nav-link text-dark fw-bold" title="Check the status of tickets in progress">
+            <i class="bi bi-card-checklist" style="color: black;"></i> Progress Tickets
+          </a>
+          <a routerLink="resolvedtickets" class="nav-link text-dark fw-bold" title="View all resolved tickets">
+            <i class="bi bi-lightbulb" style="color: black;"></i> Resolved Tickets
+          </a>
         </nav>
       </aside>
   <div class="content pt-5" [class.shifted]="isSidebarActive">

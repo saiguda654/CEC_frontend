@@ -99,28 +99,58 @@ export class superadminComponent {
 
   }
 
-  toggleAdminTable(): void {
-    this.showAdminTable = !this.showAdminTable;
+  toggleAdminTable(): void {;
+    this.showAdminTable = true;
+    this.showUserTable = false;
+    this.showAdminAdd = false;
+    this.showUserAdd = false;
+    this.showQueryTable = false;
+    this.showSuggestionTable = false;
   }
 
   toggleSuggestionTable(): void {
-    this.showSuggestionTable = !this.showSuggestionTable;
+    this.showAdminTable = false;
+    this.showUserTable = false;
+    this.showAdminAdd = false;
+    this.showUserAdd = false;
+    this.showQueryTable = false;
+    this.showSuggestionTable = true;
   }
 
   toggleUserTable(): void {
-    this.showUserTable = !this.showUserTable
+    this.showAdminTable = false;
+    this.showUserTable = true;
+    this.showAdminAdd = false;
+    this.showUserAdd = false;
+    this.showQueryTable = false;
+    this.showSuggestionTable = false;
   }
 
   toggleUserForm(): void {
-    this.showUserAdd = !this.showUserAdd;
+    this.showAdminTable = false;
+    this.showUserTable = false;
+    this.showAdminAdd = false;
+    this.showUserAdd = true;
+    this.showQueryTable = false;
+    this.showSuggestionTable = false;
   }
 
   toggleAdminForm(): void {
-    this.showAdminAdd = !this.showAdminAdd;
+    this.showAdminTable = false;
+    this.showUserTable = false;
+    this.showAdminAdd = true;
+    this.showUserAdd = false;
+    this.showQueryTable = false;
+    this.showSuggestionTable = false;
   }
 
   toggleTicketForm(): void {
-    this.showQueryTable = !this.showQueryTable;
+    this.showAdminTable = false;
+    this.showUserTable = false;
+    this.showAdminAdd = false;
+    this.showUserAdd = false;
+    this.showQueryTable = true;
+    this.showSuggestionTable = false;
   }
 
   private passwordMatchValidator: ValidatorFn = (control: AbstractControl) => {

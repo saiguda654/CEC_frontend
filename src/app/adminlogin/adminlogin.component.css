@@ -131,3 +131,11 @@ small {
   }
 }
 
+.password-toggle-icon {
+  position: absolute;
+  right: 10px; /* Adjust based on input padding */
+  top: 70%;
+  transform: translateY(-50%);
+  z-index: 2;
+  color: #6c757d; /* Optional: match icon color with the input border */
+}
